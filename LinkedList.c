@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//Node Structure
+//Node Structure 
 struct node {
 	int data;
 	struct node *next;
@@ -12,6 +12,7 @@ void print();
 //Root pointer 
 struct node *root = NULL; 
 
+//main function start
 int main() {
 	
 	int num,i,input;
