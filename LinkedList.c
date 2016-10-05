@@ -11,7 +11,8 @@ void print();
 
 //Root pointer 
 struct node *root = NULL; 
-//main fuction start
+
+//main function start
 int main() {
 	
 	int num,i,input;
