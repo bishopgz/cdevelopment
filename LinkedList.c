@@ -1,55 +1,73 @@
 #include <stdio.h>
 #include <stdlib.h>
+//Declares
+void add(int data);
+void removeAt(int pos);
+void view();
 
-//Node Structure 
-struct node {
+
+struct Node {
 	int data;
-	struct node *next;
+	struct Node *next;
 };
-void add(int num);
-void print();
 
-//Root pointer 
-struct node *root = NULL; 
+//Top pointer
+struct Node *head = NULL;
 
-//main function start
+
+void add(int num){
+	//Allocate memory (returns pointer)
+	struct Node *temp = malloc( sizeof(struct Node) ); 
+	temp->data = num;
+	temp->next = head;
+	head = temp;
+}
+
+void view(){
+	//Loop through all elements and print them
+	struct Node *toggle = head;
+	while(toggle != NULL){
+		printf("Element %d\n",toggle->data);
+		toggle=toggle->next;
+	}	
+}
+
+
+void removeAt(int pos){
+	//Set pointer to top
+	struct Node *index = head;
+	int i;
+	
+	//If position to remove is the 1st
+	if (pos == 1){
+		
+		//Point top to 2nd element
+		head = index->next;
+		free(index);
+	} else {
+		//Loop through till posiion - 2
+		for( i = 0; i < pos-2; i++)
+			index = index->next;
+		
+		//Create links
+		struct Node *temp = index->next;
+		index->next = temp->next;
+		free(temp);
+	}
+}
+
+
 int main() {
 	
-	int num,i,input;
-	printf("Choose number of entries->");
-	scanf("%i",&num);
-	for (i = 1; i <= num; i++){
-		printf("\nEnter number->");
-		scanf("%i",&input);
-		add(input);
-		print();
-	}
+	add(5);
+	add(3);
+	add(4);
+	add(10);
+	view();
+	removeAt(2);
+	printf("\n");
+	view();
+	
 	
 	return 0;
 }
-
-void add(int num){
-	struct node *temp = malloc(sizeof(struct node));
-	temp->data = num;
-	temp->next = root;
-	root = temp;
-
-}
-
-void print(){
-	struct node *p = root;
-
-	while (p != NULL){
-		printf("%d ",p->data);
-		p = p->next;
-	}
-}
-
-
-
-
-
-
-
-
-
