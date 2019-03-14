@@ -18,7 +18,10 @@ int main(){
 		int pop;
 		input >> pop;
 		
-		cout << line << " -- " << pop << endl;
+		input.get();
+		if (!input) break;
+		
+		cout << "'" << line << "'" << " -- " << "'" << pop << "'" << endl;
 	}
 	
 	input.close();
