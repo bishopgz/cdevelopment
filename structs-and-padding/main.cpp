@@ -28,10 +28,11 @@ int main(){
 	*/
 	/* cout << sizeof(Generic); */
 	const char * fileName = "test.bin";
+	Generic object = {"generic", 23000, 198.345};
+	
+	/* Write file */
 	ofstream outFile;
 	outFile.open(fileName, ios::binary);
-	
-	Generic object = {"generic", 23000, 198.345};
 	
 	if (outFile.is_open()){
 		/* Write the struct to the file */
@@ -39,6 +40,24 @@ int main(){
 		outFile.write(reinterpret_cast<char *>(&object), sizeof(Generic));
 		outFile.close();
 		cout << "Created file {" << fileName << "} successfully." << endl;
+	} else {
+		cout << "Couldn't create file {" << fileName << "}" << endl;
+	}
+	
+	/* Read file */
+	ifstream inFile;
+	inFile.open(fileName, ios::binary);
+	Generic viewObj = {};
+	
+	if (inFile.is_open()){
+		/* Read the struct from the file */
+		// outFile.read((char *)&object, sizeof(Generic)); // old way
+		inFile.read(reinterpret_cast<char *>(&viewObj), sizeof(Generic));
+		inFile.close();
+		cout << fileName << " opened successfully. Bellow are all the properties." << endl;
+		cout << viewObj.property << endl;
+		cout << viewObj.counterProperty << endl;
+		cout << viewObj.compProperty << endl;
 	} else {
 		cout << "Couldn't create file {" << fileName << "}" << endl;
 	}
