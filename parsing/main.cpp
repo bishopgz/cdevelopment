@@ -19,6 +19,9 @@ int main(){
 		input >> pop;
 		
 		input.get();
+		
+		input >> ws; 
+		
 		if (!input) break;
 		
 		cout << "'" << line << "'" << " -- " << "'" << pop << "'" << endl;
